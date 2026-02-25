@@ -1,11 +1,135 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PakePlus</title>
-    </head>
-    <body>
-        PakePlus
-    </body>
+<html lang="zh-CN" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Splash Battle</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#2b6cee",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101622",
+              "human-bg": "#1e293b", 
+              "dragon-bg": "#2d1b1b", 
+              "dragon-accent": "#ef4444",
+              "human-accent": "#3b82f6",
+              "card-red": "#ef4444",
+              "card-blue": "#3b82f6",
+              "card-purple": "#a855f7",
+            },
+            fontFamily: {
+              "display": ["Be Vietnam Pro", "sans-serif"],
+              "chinese": ["ZCOOL KuaiLe", "system-ui", "sans-serif"],
+              "body": ["Noto Sans SC", "sans-serif"],
+            },
+            animation: {
+              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'bounce-slight': 'bounce-slight 2s infinite',
+              'draw-sequence': 'draw-sequence 4s ease-in-out forwards',
+              'flip-card': 'flip-card 4s ease-in-out forwards',
+              'text-pop': 'text-pop 4s ease-in-out forwards',
+              'dim-bg': 'dim-bg 4s ease-in-out forwards',
+              'sparkle': 'sparkle-gold 1.5s infinite',
+            },
+            keyframes: {
+              'bounce-slight': {
+                '0%, 100%': { transform: 'translateY(-5%)' },
+                '50%': { transform: 'translateY(0)' },
+              },
+              'draw-sequence': {
+                '0%': { top: '70%', left: '80%', transform: 'scale(0.3) rotate(15deg)', opacity: '0' },
+                '10%': { opacity: '1' },
+                '30%': { top: '50%', left: '50%', transform: 'translate(-50%, -50%) scale(1.5) rotate(0deg)' },
+                '70%': { top: '50%', left: '50%', transform: 'translate(-50%, -50%) scale(1.5) rotate(0deg)' },
+                '100%': { top: '90%', left: '50%', transform: 'translate(-50%, -50%) scale(0.5)', opacity: '0' }
+              },
+              'flip-card': {
+                '0%, 35%': { transform: 'rotateY(0deg)' },
+                '50%': { transform: 'rotateY(90deg)' },
+                '65%, 100%': { transform: 'rotateY(180deg)' }
+              },
+              'text-pop': {
+                '0%': { opacity: '0', transform: 'scale(0.5)' },
+                '20%': { opacity: '1', transform: 'scale(1.2)' },
+                '30%': { transform: 'scale(1)' },
+                '80%': { opacity: '1', transform: 'scale(1)', filter: 'blur(0px)' },
+                '100%': { opacity: '0', transform: 'scale(1.5)', filter: 'blur(10px)' }
+              },
+              'dim-bg': {
+                '0%': { backgroundColor: 'rgba(0,0,0,0)' },
+                '10%': { backgroundColor: 'rgba(0,0,0,0.6)' },
+                '80%': { backgroundColor: 'rgba(0,0,0,0.6)' },
+                '100%': { backgroundColor: 'rgba(0,0,0,0)', visibility: 'hidden' }
+              },
+              'sparkle-gold': {
+                '0%, 100%': { opacity: '0.5', transform: 'scale(1)' },
+                '50%': { opacity: '1', transform: 'scale(1.2)' }
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      .perspective-board { perspective: 1000px; }
+      .perspective-1000 { perspective: 1000px; }
+      .transform-style-3d { transform-style: preserve-3d; }
+      .backface-hidden { backface-visibility: hidden; }
+      .rotate-y-180 { transform: rotateY(180deg); }
+      .human-glow { box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
+      .dragon-glow { box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); }
+      .secret-glow { box-shadow: 0 0 15px rgba(168, 85, 247, 0.5); }
+      
+      .glass-panel {
+        background: rgba(16, 22, 34, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .text-glow { text-shadow: 0 0 15px rgba(255, 255, 255, 0.3); }
+      
+      /* Scrollbar */
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: #3f4756; border-radius: 4px; }
+      
+      /* Disable Touch Callouts */
+      body {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        touch-action: manipulation;
+      }
+    </style>
+
+<link rel="stylesheet" href="/index.css">
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.4/",
+    "react": "https://esm.sh/react@^19.2.4",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+    "uuid": "https://esm.sh/uuid@^13.0.0"
+  }
+}
+</script>
+  <script type="module" crossorigin src="/assets/index-bQbC5qZw.js"></script>
+</head>
+  <body class="bg-background-light dark:bg-background-dark text-white h-[100dvh] w-screen overflow-hidden select-none">
+    <div id="root"></div>
+</body>
 </html>
